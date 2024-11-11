@@ -7,7 +7,7 @@ on:
 jobs: 
     firstjob: 
          name: ASCII-Workflow
-         runs-on: ubuntu-lastest
+         runs-on: ubuntu-latest
 
          steps:
             - name: checkout 
