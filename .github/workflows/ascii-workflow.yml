@@ -1,23 +1,23 @@
 
-name: ASCII Workflow
+# name: ASCII Workflow
 
-on: 
- - push
+# on: 
+#  - push
 
-jobs: 
-    firstjob: 
-         name: ASCII-Workflow
-         runs-on: ubuntu-latest
+# jobs: 
+#     firstjob: 
+#          name: ASCII-Workflow
+#          runs-on: ubuntu-latest
 
-         steps:
-            - name: checkout 
-              uses: actions/checkout@v4
+#          steps:
+#             - name: checkout 
+#               uses: actions/checkout@v4
 
-            - name: permission on script
-              run: chmod 700 ./ascii-script.sh  
+#             - name: permission on script
+#               run: chmod 700 ./ascii-script.sh  
 
-            - name: execute ascii script
-              run: ./ascii-script.sh
+#             - name: execute ascii script
+#               run: ./ascii-script.sh
               
 
 

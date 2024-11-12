@@ -1,0 +1,43 @@
+
+name: Multiple-jobs
+
+on: 
+ - push
+
+jobs: 
+    build:  
+      runs-on: ubuntu-latest
+      steps:
+         - name: checkout 
+           uses: actions/checkout@v4
+
+         - name: permission on script
+           run: chmod 700 ./ascii-script.sh  
+
+         - name: execute ascii script
+           run: ./ascii-script.sh
+
+    test: 
+        runs-on: ubuntu-latest
+        steps:
+         - name: checkout
+           uses: actions/checkout@v4
+
+         - name: sleep for 10 second
+           run: sleep 10
+
+         - name: test if the word is in this file
+           run: grep -i "dragon" dragon.txt
+
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+         - name: checkout
+           uses: actions/checkout@v4
+
+         - name: read file
+           run: cat dragon.txt
+
+         - name: deploy file
+           run: echo "deploying file ........100%"
+           
