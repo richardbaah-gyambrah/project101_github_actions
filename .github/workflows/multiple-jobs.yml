@@ -17,6 +17,13 @@ jobs:
          - name: execute ascii script
            run: ./ascii-script.sh
 
+         - uses: actions/upload-artifact@v4
+           with:
+            name: dragon-text-file
+            path: dragon.txt
+
+
+
     test: 
         needs: build
         runs-on: ubuntu-latest
@@ -27,8 +34,15 @@ jobs:
          - name: sleep for 10 second
            run: sleep 10
 
+         - uses: actions/download-artifact@v4
+           with:
+            name: dragon-text-file
+            path: dragon.txt
+
          - name: test if the word is in this file
            run: grep -i "dragon" dragon.txt
+
+         
 
     deploy:
         needs: test
@@ -36,6 +50,12 @@ jobs:
         steps:
          - name: checkout
            uses: actions/checkout@v4
+
+        
+         - uses: actions/download-artifact@v4
+           with:
+            name: dragon-text-file
+            path: dragon.txt
 
          - name: read file
            run: cat dragon.txt
