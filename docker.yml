@@ -1,0 +1,38 @@
+name: Docker-and-Deploy
+
+on: 
+- push
+
+env: 
+  CONTAINER_REGISTRY: docker.io
+    DOCKER_USERNAME: richardbaah
+    DOCKER_PASSWORD: Richard1145
+    IMAGE_NAME: resume-app
+
+jobs:
+   docker_build: 
+    runs-on: ubuntu-latest
+
+   steps: 
+     - name: Checkout code
+       uses: actions/checkout@v4
+
+     - name: docker build
+       run: docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest .
+
+     - name: docker login
+       run: docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
+
+     - name: docker Publish
+       run : docker push $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+
+   docker_deploy:
+     needs: docker_build
+     runs-on: ubuntu-latest
+
+     steps:
+      - name: docker login 
+        run: docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
+
+      - name: docker Run
+        run: docker run -d -p 8080:80 $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
