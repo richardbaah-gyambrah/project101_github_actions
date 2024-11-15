@@ -2,12 +2,12 @@ name: Docker-and-Deploy workflow
 
 on: 
   push:
-    branches:  
-     - demo 
+     branches:  
+       - demo 
 
-   paths: 
-     - dockerfile
-     - index.html
+     paths: 
+        - dockerfile
+        - index.html
 
 env: 
     CONTAINER_REGISTRY: docker.io
